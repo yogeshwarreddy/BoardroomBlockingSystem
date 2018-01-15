@@ -1,2 +1,8 @@
 *.bak
 *.mwb
+*/.settings/
+*/target/
+*/.classpath
+*/.project
+*/bin
+*.class
