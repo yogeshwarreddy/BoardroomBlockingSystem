@@ -1,13 +1,39 @@
 package com.accolite.au.project.boardroombooking.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@Table(name="Users")
 public class User {
-
+	@Id
+    @Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="firstname")
 	private String firstName;
+	
+	@Column(name="lastname")
 	private String lastName;
+	
+	@Column(name="password")
 	private String password;
-
+	
+	@ManyToOne
+	@JoinColumn(name="branch_id")
 	private Branch branch;
 
 	public User() {

@@ -3,13 +3,46 @@ package com.accolite.au.project.boardroombooking.model;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@Entity
+@Table(name="BookingRequest")
 public class BookingRequest {
+	
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(name="status")
 	private int status;
+	
+	@Column(name="booking_date")
 	private LocalDateTime booking_date;
+	
+	@Column(name="hours")
 	private LocalTime hours;
+	
+	@Column(name="purpose")
 	private String purpose;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="boardroom_id")
 	private BoardRoom boardroom;
 
 
