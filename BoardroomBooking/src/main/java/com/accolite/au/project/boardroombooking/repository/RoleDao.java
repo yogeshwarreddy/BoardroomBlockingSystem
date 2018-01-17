@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.accolite.au.project.boardroombooking.model.Role;
 
-public interface RoleDao {
+public interface RoleDao{
 	public List<Role> getAllRoles();
 	public Role getRoleById(int id);
 	public boolean saveRole(Role role);

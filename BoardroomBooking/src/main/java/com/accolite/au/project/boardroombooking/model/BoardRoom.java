@@ -1,7 +1,19 @@
 package com.accolite.au.project.boardroombooking.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity(name = "BoardRoom")
 public class BoardRoom {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@OneToOne
 	private Branch branch;
 	private String name;
 	private int capacity;

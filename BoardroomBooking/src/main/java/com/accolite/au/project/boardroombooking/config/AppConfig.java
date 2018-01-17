@@ -29,8 +29,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Import(value= {WebConfig.class})
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan(basePackages= {"com.accolite.au.project.boardroombooking.dao" ,
-		"com.accolite.au.project.boardroombooking.service",
+@ComponentScan(basePackages= {"com.accolite.au.project.boardroombooking.service",
 		"com.accolite.au.project.boardroombooking.repository"})
 public class AppConfig {
 

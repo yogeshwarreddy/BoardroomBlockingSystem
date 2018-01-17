@@ -3,13 +3,27 @@ package com.accolite.au.project.boardroombooking.model;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity(name = "BookingRequest")
 public class BookingRequest {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int status;
 	private LocalDateTime booking_date;
 	private LocalTime hours;
 	private String purpose;
+	
+	@ManyToOne
 	private User user;
+	
+	@ManyToOne
 	private BoardRoom boardroom;
 
 
