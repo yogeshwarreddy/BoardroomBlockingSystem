@@ -1,13 +1,27 @@
 package com.accolite.au.project.boardroombooking.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ManyToAny;
+
+@Entity(name = "User")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String email;
 	private String firstName;
 	private String lastName;
 	private String password;
 
+	@ManyToOne
 	private Branch branch;
 
 	public User() {
