@@ -56,7 +56,7 @@ public class BranchDaoImpl implements BranchDao {
 		Session session = sessionFactory.getCurrentSession();
 	    Branch branch = session.byId(Branch.class).load(id);
 	    session.delete(branch);
-		return false;
+		return true;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BranchDaoImpl implements BranchDao {
 		Session session = sessionFactory.getCurrentSession();
 	    Branch branch2 = session.byId(Branch.class).load(branch.getId());
 	    session.delete(branch2);
-		return false;
+		return true;
 	}
 
 }

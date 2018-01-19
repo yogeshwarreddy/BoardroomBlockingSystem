@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accolite.au.project.boardroombooking.model.Branch;
 import com.accolite.au.project.boardroombooking.model.User;
+import com.accolite.au.project.boardroombooking.service.BranchService;
 import com.accolite.au.project.boardroombooking.service.UserService;
 
 @RestController
@@ -21,10 +23,19 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private BranchService branchService;
+	
 	@PostMapping("/user")
 	public ResponseEntity<String> save(@RequestBody User user) {
 		userService.saveUser(user);
 		return ResponseEntity.ok().body("New user Added");
+	}
+	
+	@PostMapping("/user/admin")
+	public ResponseEntity<String> saveAdmin(@RequestBody User user) {
+		userService.saveAdmin(user);
+		return ResponseEntity.ok().body("New Admin Added");
 	}
 
 

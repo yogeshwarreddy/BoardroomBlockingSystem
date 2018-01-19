@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "User")
 public class User {
@@ -22,16 +30,30 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String password;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY)
+	private Set<BookingRequest> requests;
 
 	@ManyToOne
+	@JoinColumn(name = "branch_id")
+	@Cascade(value = { CascadeType.ALL })
 	private Branch branch;
-	
-	@ManyToMany
-	@JoinTable(name="user_roles",
-			joinColumns= {@JoinColumn(name="user_id")},
-			inverseJoinColumns= {@JoinColumn(name="role_id")})
-	private Set<Role> roles=new HashSet<Role>();
-	
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_roles", joinColumns = {
+			@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USERID_FK")) }, inverseJoinColumns = {
+					@JoinColumn(name = "role_id") })
+	private Set<Role> roles = new HashSet<>();
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	public User() {
 		super();
 	}
@@ -53,6 +75,39 @@ public class User {
 		this.lastName = lastName;
 		this.password = password;
 		this.branch = branch;
+	}
+
+	public User(int id, String email, String firstName, String lastName, String password, Branch branch,
+			Set<Role> roles) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.branch =branch ;
+		this.roles = roles;
+	}
+	
+	public User(int id, String email, String firstName, String lastName, String password, Set<BookingRequest> requests,
+			Branch branch, Set<Role> roles) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.requests = requests;
+		this.branch = branch;
+		this.roles = roles;
+	}
+
+	public Set<BookingRequest> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(Set<BookingRequest> requests) {
+		this.requests = requests;
 	}
 
 	public int getId() {

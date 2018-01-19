@@ -1,54 +1,69 @@
 package com.accolite.au.project.boardroombooking.model;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity(name = "BookingRequest")
 public class BookingRequest {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int status;
-	private LocalDateTime booking_date;
-	private LocalTime hours;
-	private String purpose;
-	
-	@ManyToOne
-	private User user;
-	
-	@ManyToOne
-	private BoardRoom boardroom;
 
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date startTime;
+
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date endTime;
+
+	private String purpose;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@Cascade(value = { CascadeType.ALL })
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "room_id")
+	@Cascade(value = { CascadeType.ALL })
+	private BoardRoom boardroom;
 
 	public BookingRequest() {
 		super();
 	}
 
-	public BookingRequest(int status, LocalDateTime booking_date, LocalTime hours, String purpose, User user,
-			BoardRoom boardroom) {
+	public BookingRequest(int status, Date startTime, Date endTime, String purpose, User user, BoardRoom boardroom) {
 		super();
 		this.status = status;
-		this.booking_date = booking_date;
-		this.hours = hours;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.purpose = purpose;
 		this.user = user;
 		this.boardroom = boardroom;
 	}
 
-	public BookingRequest(int id, int status, LocalDateTime booking_date, LocalTime hours, String purpose, User user,
+	public BookingRequest(int id, int status, Date startTime, Date endTime, String purpose, User user,
 			BoardRoom boardroom) {
 		super();
 		this.id = id;
 		this.status = status;
-		this.booking_date = booking_date;
-		this.hours = hours;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.purpose = purpose;
 		this.user = user;
 		this.boardroom = boardroom;
@@ -70,20 +85,20 @@ public class BookingRequest {
 		this.status = status;
 	}
 
-	public LocalDateTime getBooking_date() {
-		return booking_date;
+	public Date getstartTime() {
+		return startTime;
 	}
 
-	public void setBooking_date(LocalDateTime booking_date) {
-		this.booking_date = booking_date;
+	public void setstartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	
+	public Date getendTime() {
+		return endTime;
 	}
 
-	public LocalTime getHours() {
-		return hours;
-	}
-
-	public void setHours(LocalTime hours) {
-		this.hours = hours;
+	public void setendTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public String getPurpose() {

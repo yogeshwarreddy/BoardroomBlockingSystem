@@ -41,6 +41,7 @@ public class UserDaoImpl implements UserDao {
 		sessionFactory.getCurrentSession().save(user);
 		return true;
 	}
+	
 
 	@Override
 	public boolean updateUser(User user) {
@@ -70,5 +71,6 @@ public class UserDaoImpl implements UserDao {
 	    session.delete(user2);
 		return true;
 	}
+
 
 }

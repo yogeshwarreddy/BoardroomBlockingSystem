@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accolite.au.project.boardroombooking.model.BoardRoom;
+import com.accolite.au.project.boardroombooking.model.Branch;
 import com.accolite.au.project.boardroombooking.repository.BoardRoomDao;
 
 @Service
@@ -15,6 +16,9 @@ public class BoardRoomServiceImpl implements BoardRoomService {
 
 	@Autowired
 	private BoardRoomDao boardRoomDao;
+	
+	@Autowired
+	BranchService branchService;
 	
 	@Override
 	public List<BoardRoom> getAllRooms() {
@@ -28,6 +32,15 @@ public class BoardRoomServiceImpl implements BoardRoomService {
 
 	@Override
 	public boolean saveRoom(BoardRoom room) {
+		Branch branch = room.getBranch();
+		if(branch!=null) {
+			branch = branchService.getBranchById(branch.getId());
+			if(branch==null) {
+				throw new RuntimeException("Bad Request Can't create Branch");
+			}
+			branch.getBoardRooms().add(room);
+		}
+		room.setBranch(branch);
 		return boardRoomDao.saveRoom(room);
 	}
 

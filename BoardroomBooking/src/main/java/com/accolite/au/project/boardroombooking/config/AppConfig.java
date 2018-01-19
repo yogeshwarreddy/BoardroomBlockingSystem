@@ -11,6 +11,7 @@ import static org.hibernate.cfg.AvailableSettings.PASS;
 import static org.hibernate.cfg.AvailableSettings.SHOW_SQL;
 import static org.hibernate.cfg.AvailableSettings.URL;
 import static org.hibernate.cfg.AvailableSettings.USER;
+import static org.hibernate.cfg.AvailableSettings.DIALECT;
 
 import java.util.Properties;
 
@@ -50,6 +51,7 @@ public class AppConfig {
 		// Setting Hibernate properties
 		props.put(SHOW_SQL, env.getProperty("hibernate.show_sql"));
 		props.put(HBM2DDL_AUTO, env.getProperty("hibernate.hbm2ddl.auto"));
+		props.put(DIALECT, env.getProperty("hibernate.dialect"));
 
 		// Setting C3P0 properties
 		props.put(C3P0_MIN_SIZE, env.getProperty("hibernate.c3p0.min_size"));

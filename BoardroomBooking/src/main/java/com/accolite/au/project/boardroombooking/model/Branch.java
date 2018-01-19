@@ -1,9 +1,15 @@
 package com.accolite.au.project.boardroombooking.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "Branch")
 public class Branch {
@@ -11,6 +17,14 @@ public class Branch {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String location;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "branch", fetch=FetchType.LAZY)
+	private Set<User> users;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "branch", fetch=FetchType.LAZY)
+	private Set<BoardRoom> boardRooms;
 
 	public Branch() {
 		super();
@@ -25,6 +39,38 @@ public class Branch {
 		super();
 		this.id = id;
 		this.location = location;
+	}
+
+	public Branch(int id, String location, Set<User> users) {
+		super();
+		this.id = id;
+		this.location = location;
+		this.users = users;
+	}
+
+	public Branch(int id, String location, Set<User> users, Set<BoardRoom> boardRooms) {
+		super();
+		this.id = id;
+		this.location = location;
+		this.users = users;
+		this.boardRooms = boardRooms;
+	}
+
+	
+	public Set<BoardRoom> getBoardRooms() {
+		return boardRooms;
+	}
+
+	public void setBoardRooms(Set<BoardRoom> boardRooms) {
+		this.boardRooms = boardRooms;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public int getId() {

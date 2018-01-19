@@ -58,7 +58,7 @@ public class BoardRoomDaoImp implements BoardRoomDao {
 		Session session = sessionFactory.getCurrentSession();
 	    BoardRoom room = session.byId(BoardRoom.class).load(id);
 	    session.delete(room);
-		return false;
+		return true;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class BoardRoomDaoImp implements BoardRoomDao {
 		Session session = sessionFactory.getCurrentSession();
 	    BoardRoom room2 = session.byId(BoardRoom.class).load(room.getId());
 	    session.delete(room2);
-		return false;
+		return true;
 	}
 
 }

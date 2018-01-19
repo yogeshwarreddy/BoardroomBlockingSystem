@@ -47,8 +47,8 @@ public class BookingRequestDaoImpl implements BookingRequestDao {
 		Session session = sessionFactory.getCurrentSession();
 		BookingRequest request2 = session.byId(BookingRequest.class).load(request.getId());
 		request2.setBoardroom(request.getBoardroom());
-		request2.setBooking_date(request.getBooking_date());
-		request2.setHours(request.getHours());
+		request2.setstartTime(request.getstartTime());
+		request2.setendTime(request.getendTime());
 		request2.setPurpose(request.getPurpose());
 		request2.setStatus(request.getStatus());
 		request2.setUser(request.getUser());

@@ -1,10 +1,16 @@
 package com.accolite.au.project.boardroombooking.model;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity(name = "BoardRoom")
 public class BoardRoom {
@@ -13,8 +19,11 @@ public class BoardRoom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "branch_id")
+	@Cascade(value = { CascadeType.ALL })
 	private Branch branch;
+
 	private String name;
 	private int capacity;
 
@@ -36,6 +45,7 @@ public class BoardRoom {
 		this.name = name;
 		this.capacity = capacity;
 	}
+	
 
 	public int getId() {
 		return id;

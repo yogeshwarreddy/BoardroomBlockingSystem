@@ -8,6 +8,7 @@ public interface UserService {
 	List<User> getAllUsers();
 	User getUserById(int id);
 	boolean saveUser(User user);
+	boolean saveAdmin(User user);
 	boolean updateUser(User user);
 	boolean deleteUserById(int id);
 	boolean deleteUser(User user);
