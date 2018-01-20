@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.accolite.au.project.boardroombooking.model.BookingRequest;
 import com.accolite.au.project.boardroombooking.model.Branch;
 import com.accolite.au.project.boardroombooking.model.Role;
 import com.accolite.au.project.boardroombooking.model.User;
@@ -24,8 +23,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private BranchService branchService;
 	
-/*	@Autowired
-	private BookingRequestService bookingRequestService; */
 	
 	@Override
 	   public List<User> getAllUsers() {
@@ -76,12 +73,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean deleteUserById(int id) {
-		/*List<BookingRequest> requests = bookingRequestService.getAllRequests();
-		for(int i = 0;i < requests.size() ; i++) {
-			if(id == requests.get(i).getUser().getId()) {
-				bookingRequestService.deleteRequest(requests.get(i));
-			}
-		}*/
 		return userDao.deleteUserById(id);
 	}
 
