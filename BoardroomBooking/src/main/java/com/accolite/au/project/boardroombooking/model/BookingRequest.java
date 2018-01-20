@@ -35,12 +35,10 @@ public class BookingRequest {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@Cascade(value = { CascadeType.ALL })
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "room_id")
-	@Cascade(value = { CascadeType.ALL })
 	private BoardRoom boardroom;
 
 	public BookingRequest() {

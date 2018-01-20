@@ -33,13 +33,13 @@ public class User {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY)
+	@Cascade(value = { CascadeType.ALL })
 	private Set<BookingRequest> requests;
 
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
-	@Cascade(value = { CascadeType.ALL })
 	private Branch branch;
-
+ 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = {
 			@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USERID_FK")) }, inverseJoinColumns = {

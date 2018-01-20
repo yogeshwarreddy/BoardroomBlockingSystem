@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accolite.au.project.boardroombooking.model.Branch;
+import com.accolite.au.project.boardroombooking.model.BookingRequest;
 import com.accolite.au.project.boardroombooking.model.User;
+import com.accolite.au.project.boardroombooking.service.BookingRequestService;
 import com.accolite.au.project.boardroombooking.service.BranchService;
 import com.accolite.au.project.boardroombooking.service.UserService;
 
@@ -25,6 +26,7 @@ public class UserController {
 	
 	@Autowired
 	private BranchService branchService;
+	
 	
 	@PostMapping("/user")
 	public ResponseEntity<String> save(@RequestBody User user) {

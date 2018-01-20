@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "Branch")
@@ -20,10 +23,12 @@ public class Branch {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "branch", fetch=FetchType.LAZY)
+	@Cascade(value = { CascadeType.ALL }) // if i delete branch all users must be deleted
 	private Set<User> users;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "branch", fetch=FetchType.LAZY)
+	@Cascade(value = { CascadeType.ALL }) // if i delete branch all board rooms should be deleted
 	private Set<BoardRoom> boardRooms;
 
 	public Branch() {

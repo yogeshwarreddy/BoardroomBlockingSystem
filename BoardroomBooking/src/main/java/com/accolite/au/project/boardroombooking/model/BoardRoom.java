@@ -21,7 +21,6 @@ public class BoardRoom {
 	
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
-	@Cascade(value = { CascadeType.ALL })
 	private Branch branch;
 
 	private String name;

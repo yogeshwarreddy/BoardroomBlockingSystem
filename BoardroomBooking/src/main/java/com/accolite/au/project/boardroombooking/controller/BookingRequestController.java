@@ -50,7 +50,7 @@ public class BookingRequestController {
 	}
 
 
-	@DeleteMapping("/requset/{id}")
+	@DeleteMapping("/request/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		bookingRequestService.deleteRequestById(id);
 		return ResponseEntity.ok().body("Request has been deleted successfully.");
