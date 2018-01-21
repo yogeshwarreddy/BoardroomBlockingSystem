@@ -68,4 +68,9 @@ public class BookingRequestServiceImpl implements BookingRequestService {
 		return bookingRequestDao.rescheduleRequest(id);
 	}
 
+	@Override
+	public List<BookingRequest> getRequestsByUserId(int id) {
+		return bookingRequestDao.getRequestsByUserId(id);
+	}
+
 }
