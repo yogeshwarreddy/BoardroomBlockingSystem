@@ -3,6 +3,7 @@ package com.accolite.au.project.boardroombooking.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -17,6 +18,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,6 +28,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(unique = true)
 	private String email;
 	private String firstName;
 	private String lastName;
