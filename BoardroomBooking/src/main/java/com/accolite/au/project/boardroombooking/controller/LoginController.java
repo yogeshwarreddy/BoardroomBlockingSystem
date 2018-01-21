@@ -1,6 +1,8 @@
 package com.accolite.au.project.boardroombooking.controller;
 
 import org.apache.log4j.Logger;
+
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -50,7 +52,8 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<User> save(@RequestBody Login obj) {
+	public ResponseEntity<User> userLogin(@RequestBody Login obj, HttpSession httpSession) {
+		logger.info("User trying to Log in ");
 		User user = loginService.getUserByEmail(obj.getEmail());
 		if (user == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -64,16 +67,31 @@ public class LoginController {
 	}
 
 	@GetMapping("/currentuser")
-	public ResponseEntity<User> getCurrentUser() {
+	public ResponseEntity<User> getCurrentUser(HttpSession httpSession) {
+		logger.info("Obtaining Current user data");
+		if(!httpSession.getAttributeNames().hasMoreElements()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
 		User user = userService.getUserById((int) httpSession.getAttribute("userId"));
 		return ResponseEntity.ok().body(user);
 	}
 
 	@GetMapping("/currentuser/requests")
-	public ResponseEntity<List<BookingRequest>> getCurrentUserRequests() {
+	public ResponseEntity<List<BookingRequest>> getCurrentUserRequests(HttpSession httpSession) {
+		logger.info("Obtaining Current user Requests");
+		if(!httpSession.getAttributeNames().hasMoreElements()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
 		List<BookingRequest> bookingRequests = bookingRequestService
 				.getRequestsByUserId((int) httpSession.getAttribute("userId"));
 		return ResponseEntity.ok().body(bookingRequests);
+	}
+
+	@GetMapping("/logout")
+	public ResponseEntity<String> userLogout(HttpSession httpSession) {
+		logger.info("User Logging out");
+		httpSession.invalidate();
+		return ResponseEntity.ok().body("Logged out");
 	}
 
 }
