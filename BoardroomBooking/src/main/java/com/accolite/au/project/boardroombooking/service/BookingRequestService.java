@@ -14,4 +14,5 @@ public interface BookingRequestService {
 	boolean rescheduleRequest(int id);
 	boolean deleteRequestById(int id);
 	boolean deleteRequest(BookingRequest request);
+	List<BookingRequest> getRequestsByUserId(int id);
 }

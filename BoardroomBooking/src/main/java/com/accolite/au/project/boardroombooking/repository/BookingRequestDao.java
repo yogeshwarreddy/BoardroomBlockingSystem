@@ -23,4 +23,6 @@ public interface BookingRequestDao {
 
 	public boolean deleteRequest(BookingRequest request);
 
+	public List<BookingRequest> getRequestsByUserId(int id);
+
 }

@@ -99,4 +99,14 @@ public class BookingRequestDaoImpl implements BookingRequestDao {
 		return false;
 	}
 
+	@Override
+	public List<BookingRequest> getRequestsByUserId(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM BookingRequest br WHERE br.user.id ="+id;
+		@SuppressWarnings("unchecked")
+		Query<BookingRequest> query = session.createQuery(hql);
+		return query.getResultList();
+	}
+
+
 }
