@@ -30,6 +30,16 @@ public class BoardRoomDaoImp implements BoardRoomDao {
 	    Query<BoardRoom> query = session.createQuery(cq);
 	    return query.getResultList();
 	}
+	
+	@Override
+	public List<BoardRoom> getRoomsByBranchId(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM BoardRoom br WHERE br.branch.id ="+id;
+		@SuppressWarnings("unchecked")
+		Query<BoardRoom> query = session.createQuery(hql);
+		return query.getResultList();
+		
+	}
 
 	@Override
 	public BoardRoom getRoomById(int id) {

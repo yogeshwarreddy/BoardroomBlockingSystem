@@ -34,6 +34,11 @@ public class BoardRoomController {
 		return ResponseEntity.ok().body(room);
 	}
 
+	@GetMapping("/rooms/{branchId}")
+	public ResponseEntity<List<BoardRoom>> getRoomsByBranchId(@PathVariable("branchId") int id) {
+		List<BoardRoom> rooms = boardRoomService.getRoomsByBranchId(id);
+		return ResponseEntity.ok().body(rooms);
+	}
 	
 	@GetMapping("/rooms")
 	public ResponseEntity<List<BoardRoom>> list() {

@@ -25,6 +25,11 @@ public class BookingRequestServiceImpl implements BookingRequestService {
 	public List<BookingRequest> getAllRequests() {
 		return bookingRequestDao.getAllRequests();
 	}
+	
+	@Override
+	public List<BookingRequest> getRequestsByBranchId(int id) {
+		return bookingRequestDao.getRequestsByBranchId(id);
+	}
 
 	@Override
 	public BookingRequest getRequestById(int id) {

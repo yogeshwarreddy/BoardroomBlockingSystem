@@ -6,6 +6,7 @@ import com.accolite.au.project.boardroombooking.model.BoardRoom;
 
 public interface BoardRoomService {
 	List<BoardRoom> getAllRooms();
+	List<BoardRoom> getRoomsByBranchId(int id);
 	BoardRoom getRoomById(int id);
 	boolean saveRoom(BoardRoom room);
 	boolean updateRoom(BoardRoom room);

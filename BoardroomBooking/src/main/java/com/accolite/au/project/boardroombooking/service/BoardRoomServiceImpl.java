@@ -24,6 +24,11 @@ public class BoardRoomServiceImpl implements BoardRoomService {
 	public List<BoardRoom> getAllRooms() {
 		return boardRoomDao.getAllRooms();
 	}
+	
+	@Override
+	public List<BoardRoom> getRoomsByBranchId(int id) {
+		return boardRoomDao.getRoomsByBranchId(id);
+	}
 
 	@Override
 	public BoardRoom getRoomById(int id) {

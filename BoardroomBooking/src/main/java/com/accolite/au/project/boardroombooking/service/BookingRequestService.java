@@ -6,6 +6,7 @@ import com.accolite.au.project.boardroombooking.model.BookingRequest;
 
 public interface BookingRequestService {
 	List<BookingRequest> getAllRequests();
+	List<BookingRequest> getRequestsByBranchId(int id);
 	BookingRequest getRequestById(int id);
 	boolean saveRequest(BookingRequest request);
 	boolean acceptRequest(int id);

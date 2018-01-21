@@ -6,6 +6,8 @@ import com.accolite.au.project.boardroombooking.model.BookingRequest;
 
 public interface BookingRequestDao {
 	public List<BookingRequest> getAllRequests();
+	
+	public List<BookingRequest> getRequestsByBranchId(int id);
 
 	public BookingRequest getRequestById(int id);
 

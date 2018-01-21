@@ -30,6 +30,15 @@ public class BookingRequestDaoImpl implements BookingRequestDao {
 		Query<BookingRequest> query = session.createQuery(cq);
 		return query.getResultList();
 	}
+	
+	@Override
+	public List<BookingRequest> getRequestsByBranchId(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM BookingRequest br WHERE br.user.id IN (SELECT u.id FROM User u WHERE u.branch.id="+id+")";
+		@SuppressWarnings("unchecked")
+		Query<BookingRequest> query = session.createQuery(hql);
+		return query.getResultList();
+	}
 
 	@Override
 	public BookingRequest getRequestById(int id) {

@@ -27,6 +27,12 @@ public class BookingRequestController {
 		BookingRequest request = bookingRequestService.getRequestById(id);
 		return ResponseEntity.ok().body(request);
 	}
+	
+	@GetMapping("/requests/{branchId}")
+	public ResponseEntity<List<BookingRequest>> getRequestByBranchId(@PathVariable("branchId") int id) {
+		List<BookingRequest> requests = bookingRequestService.getRequestsByBranchId(id);
+		return ResponseEntity.ok().body(requests);
+	}
 
 	@GetMapping("/requests")
 	public ResponseEntity<List<BookingRequest>> list() {
