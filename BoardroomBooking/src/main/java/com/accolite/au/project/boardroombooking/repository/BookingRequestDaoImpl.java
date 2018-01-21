@@ -16,19 +16,19 @@ import com.accolite.au.project.boardroombooking.model.BookingRequest;
 
 @Repository
 public class BookingRequestDaoImpl implements BookingRequestDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
 	public List<BookingRequest> getAllRequests() {
 		Session session = sessionFactory.getCurrentSession();
-	    CriteriaBuilder cb = session.getCriteriaBuilder();
-	    CriteriaQuery<BookingRequest> cq = cb.createQuery(BookingRequest.class);
-	    Root<BookingRequest> root = cq.from(BookingRequest.class);
-	    cq.select(root);
-	    Query<BookingRequest> query = session.createQuery(cq);
-	    return query.getResultList();
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<BookingRequest> cq = cb.createQuery(BookingRequest.class);
+		Root<BookingRequest> root = cq.from(BookingRequest.class);
+		cq.select(root);
+		Query<BookingRequest> query = session.createQuery(cq);
+		return query.getResultList();
 	}
 
 	@Override
@@ -38,29 +38,20 @@ public class BookingRequestDaoImpl implements BookingRequestDao {
 
 	@Override
 	public boolean saveRequest(BookingRequest request) {
-		sessionFactory.getCurrentSession().save(request);
-		return true;
-	}
-
-	@Override
-	public boolean updateRequest(BookingRequest request) {
-		Session session = sessionFactory.getCurrentSession();
-		BookingRequest request2 = session.byId(BookingRequest.class).load(request.getId());
-		request2.setBoardroom(request.getBoardroom());
-		request2.setstartTime(request.getstartTime());
-		request2.setendTime(request.getendTime());
-		request2.setPurpose(request.getPurpose());
-		request2.setStatus(request.getStatus());
-		request2.setUser(request.getUser());
-	    session.flush();
-	    return true;
+		if (request.getUser().getBranch().getLocation().equals(request.getBoardroom().getBranch().getLocation())) {
+			request.setStatus("REQUESTED");
+			sessionFactory.getCurrentSession().save(request);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean deleteRequestById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		BookingRequest request = session.byId(BookingRequest.class).load(id);
-	    session.delete(request);
+		session.delete(request);
 		return true;
 	}
 
@@ -68,8 +59,35 @@ public class BookingRequestDaoImpl implements BookingRequestDao {
 	public boolean deleteRequest(BookingRequest request) {
 		Session session = sessionFactory.getCurrentSession();
 		BookingRequest request2 = session.byId(BookingRequest.class).load(request.getId());
-	    session.delete(request2);
+		session.delete(request2);
 		return true;
+	}
+
+	@Override
+	public boolean acceptRequest(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		BookingRequest request = session.byId(BookingRequest.class).load(id);
+		if (request.getStatus().equals("REQUESTED")) {
+			request.setStatus("ACCEPTED");
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean rejectRequest(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		BookingRequest request = session.byId(BookingRequest.class).load(id);
+		request.setStatus("REJECTED");
+		return false;
+	}
+
+	@Override
+	public boolean rescheduleRequest(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		BookingRequest request = session.byId(BookingRequest.class).load(id);
+		request.setStatus("RESCHEDULED");
+		return false;
 	}
 
 }

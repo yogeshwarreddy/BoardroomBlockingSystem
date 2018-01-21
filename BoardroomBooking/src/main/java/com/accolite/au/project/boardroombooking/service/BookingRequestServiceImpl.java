@@ -38,10 +38,6 @@ public class BookingRequestServiceImpl implements BookingRequestService {
 		return bookingRequestDao.saveRequest(request);
 	}
 
-	@Override
-	public boolean updateRequest(BookingRequest request) {
-		return bookingRequestDao.updateRequest(request);
-	}
 
 	@Override
 	public boolean deleteRequestById(int id) {
@@ -51,6 +47,21 @@ public class BookingRequestServiceImpl implements BookingRequestService {
 	@Override
 	public boolean deleteRequest(BookingRequest request) {
 		return bookingRequestDao.deleteRequest(request);
+	}
+
+	@Override
+	public boolean acceptRequest(int id) {
+		return bookingRequestDao.acceptRequest(id);
+	}
+
+	@Override
+	public boolean rejectRequest(int id) {
+		return bookingRequestDao.rejectRequest(id);
+	}
+
+	@Override
+	public boolean rescheduleRequest(int id) {
+		return bookingRequestDao.rescheduleRequest(id);
 	}
 
 }

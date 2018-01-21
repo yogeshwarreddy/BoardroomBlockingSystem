@@ -8,7 +8,9 @@ public interface BookingRequestService {
 	List<BookingRequest> getAllRequests();
 	BookingRequest getRequestById(int id);
 	boolean saveRequest(BookingRequest request);
-	boolean updateRequest(BookingRequest request);
+	boolean acceptRequest(int id);
+	boolean rejectRequest(int id);
+	boolean rescheduleRequest(int id);
 	boolean deleteRequestById(int id);
 	boolean deleteRequest(BookingRequest request);
 }

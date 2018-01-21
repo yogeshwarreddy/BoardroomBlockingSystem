@@ -21,7 +21,7 @@ public class BookingRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int status;
+	private String status;
 
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
@@ -45,7 +45,7 @@ public class BookingRequest {
 		super();
 	}
 
-	public BookingRequest(int status, Date startTime, Date endTime, String purpose, User user, BoardRoom boardroom) {
+	public BookingRequest(String status, Date startTime, Date endTime, String purpose, User user, BoardRoom boardroom) {
 		super();
 		this.status = status;
 		this.startTime = startTime;
@@ -55,7 +55,7 @@ public class BookingRequest {
 		this.boardroom = boardroom;
 	}
 
-	public BookingRequest(int id, int status, Date startTime, Date endTime, String purpose, User user,
+	public BookingRequest(int id, String status, Date startTime, Date endTime, String purpose, User user,
 			BoardRoom boardroom) {
 		super();
 		this.id = id;
@@ -75,11 +75,11 @@ public class BookingRequest {
 		this.id = id;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

@@ -1,6 +1,7 @@
 package com.accolite.au.project.boardroombooking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,14 +31,13 @@ public class LoginController {
 	public ResponseEntity<String> save(@RequestBody Login obj) {
 		User user =loginService.getUserByEmail(obj.getEmail());
 		if(user==null) {
-			return ResponseEntity.ok().body("invalid user name");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid user name");
 		}
 		if(user.getPassword().equals(obj.getPassword())) {
 			return ResponseEntity.ok().body("login successfull");
 		}
 		else {
-			System.out.println(user.getPassword() + "  " + obj.getPassword());
-			return ResponseEntity.ok().body("invalid password");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid password");
 		}
 	}
 }
