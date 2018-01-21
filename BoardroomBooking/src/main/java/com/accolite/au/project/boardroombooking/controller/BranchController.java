@@ -2,6 +2,7 @@ package com.accolite.au.project.boardroombooking.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,12 +19,15 @@ import com.accolite.au.project.boardroombooking.service.BranchService;
 @RestController
 public class BranchController {
 	
+	private static final Logger logger = Logger.getLogger(BranchController.class);
+
 	@Autowired
 	private BranchService branchService;
 	
 
 	@PostMapping("/branch")
 	public ResponseEntity<String> save(@RequestBody Branch branch) {
+		logger.info("New branch added");
 		branchService.saveBranch(branch);
 		return ResponseEntity.ok().body("New Branch Added");
 	}
@@ -45,6 +49,7 @@ public class BranchController {
 
 	@PutMapping("/branch/{id}")
 	public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody Branch branch) {
+		logger.info("Branch with id:"+id+" updated");
 		branchService.updateBranch(branch);
 		return ResponseEntity.ok().body("Branch has been updated successfully.");
 	}
@@ -52,6 +57,7 @@ public class BranchController {
 
 	@DeleteMapping("/branch/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
+		logger.info("Branch with id:"+id+" deleted");
 		branchService.deleteBranchById(id);
 		return ResponseEntity.ok().body("Branch has been deleted successfully.");
 	}

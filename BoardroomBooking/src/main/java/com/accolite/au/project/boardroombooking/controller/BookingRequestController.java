@@ -2,6 +2,7 @@ package com.accolite.au.project.boardroombooking.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import com.accolite.au.project.boardroombooking.service.BookingRequestService;
 
 @RestController
 public class BookingRequestController {
+
+	private static final Logger logger = Logger.getLogger(BookingRequestController.class);
 
 	@Autowired
 	private BookingRequestService bookingRequestService;
@@ -44,6 +47,7 @@ public class BookingRequestController {
 
 	@PostMapping("/request")
 	public ResponseEntity<String> save(@RequestBody BookingRequest request) {
+		logger.info("New request added");
 		if (bookingRequestService.saveRequest(request)) {
 			return ResponseEntity.ok().body("New Request Added");
 		}
@@ -69,12 +73,14 @@ public class BookingRequestController {
 
 	@PutMapping("/request/reject/{id}")
 	public ResponseEntity<String> updateRequestReject(@PathVariable("id") int id) {
+		logger.info("Request with id:"+id+" updated");
 		bookingRequestService.rejectRequest(id);
 		return ResponseEntity.ok().body("Booking request has been rejected");
 	}
 
 	@DeleteMapping("/request/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") int id) {
+		logger.info("Request with id:"+id+" deleted");
 		bookingRequestService.deleteRequestById(id);
 		return ResponseEntity.ok().body("Request has been deleted successfully.");
 	}
