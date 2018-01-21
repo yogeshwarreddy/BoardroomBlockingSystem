@@ -46,7 +46,7 @@ public class RoleDaoImpl implements RoleDao {
 	public boolean updateRole(Role role) {
 		Session session = sessionFactory.getCurrentSession();
 	    Role role2 = session.byId(Role.class).load(role.getId());
-	    role2.setRole_name(role.getRole_name());
+	    role2.setRoleName(role.getRoleName());
 	    session.flush();
 	    return true;
 	}

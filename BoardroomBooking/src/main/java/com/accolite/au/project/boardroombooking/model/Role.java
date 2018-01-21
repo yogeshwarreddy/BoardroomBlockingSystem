@@ -18,7 +18,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String role_name;
+	private String roleName;
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "roles", fetch=FetchType.LAZY)
@@ -28,21 +28,21 @@ public class Role {
 		super();
 	}
 
-	public Role(String role_name) {
+	public Role(String roleName) {
 		super();
-		this.role_name = role_name;
+		this.roleName = roleName;
 	}
 
-	public Role(int id, String role_name) {
+	public Role(int id, String roleName) {
 		super();
 		this.id = id;
-		this.role_name = role_name;
+		this.roleName = roleName;
 	}
 
-	public Role(int id, String role_name, Set<User> users) {
+	public Role(int id, String roleName, Set<User> users) {
 		super();
 		this.id = id;
-		this.role_name = role_name;
+		this.roleName = roleName;
 		this.users = users;
 	}
 
@@ -54,12 +54,12 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getRole_name() {
-		return role_name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRole_name(String role_name) {
-		this.role_name = role_name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	public Set<User> getUsers() {

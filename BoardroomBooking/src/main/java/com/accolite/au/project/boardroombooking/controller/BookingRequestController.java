@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accolite.au.project.boardroombooking.model.BookingRequest;
@@ -28,8 +30,8 @@ public class BookingRequestController {
 		return ResponseEntity.ok().body(request);
 	}
 	
-	@GetMapping("/requests/{branchId}")
-	public ResponseEntity<List<BookingRequest>> getRequestByBranchId(@PathVariable("branchId") int id) {
+	@RequestMapping("/requests")
+	public ResponseEntity<List<BookingRequest>> getRequestByBranchId(@RequestParam("branchId") int id) {
 		List<BookingRequest> requests = bookingRequestService.getRequestsByBranchId(id);
 		return ResponseEntity.ok().body(requests);
 	}

@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

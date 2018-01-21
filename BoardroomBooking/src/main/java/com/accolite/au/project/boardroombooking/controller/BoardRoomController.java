@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accolite.au.project.boardroombooking.model.BoardRoom;
@@ -34,8 +36,8 @@ public class BoardRoomController {
 		return ResponseEntity.ok().body(room);
 	}
 
-	@GetMapping("/rooms/{branchId}")
-	public ResponseEntity<List<BoardRoom>> getRoomsByBranchId(@PathVariable("branchId") int id) {
+	@RequestMapping("/rooms")
+	public ResponseEntity<List<BoardRoom>> getRoomsByBranchId(@RequestParam("branchId") int id) {
 		List<BoardRoom> rooms = boardRoomService.getRoomsByBranchId(id);
 		return ResponseEntity.ok().body(rooms);
 	}
