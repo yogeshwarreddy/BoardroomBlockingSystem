@@ -1,0 +1,37 @@
+<div class="" data-ng-controller="homeController">
+  <div class="row">
+    <div class="col l4 hide-on-med-and-down">
+      <h4 class="center">Boardrooms</h4>
+      <ul class="collection">
+        <li class="collection-item avatar" data-ng-repeat="room in rooms">
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/c3/58/a5/boardroom.jpg" alt="room" class="circle">
+          <span class="title">
+            <h5>{{ room.name }}</h5>
+          </span>
+          <p>
+            Capacity: {{ room.capacity }}
+          </p>
+          <a href="#!" class="secondary-content">
+            <i class="material-icons">info</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col m12 l8">
+      <h4 class="center">Today's boardroom allocation</h4>
+      <ul class="collection">
+        <li class="collection-item avatar" data-ng-repeat="request in requests">
+          <img src="http://shrimahaveerschool.com/wp-content/uploads/2015/06/image_gallery.png" alt="user pic" class="circle responsive-img">
+          <span class="title">
+            <h4>{{request.user.firstName}}</h4>
+          </span>
+          <h6>{{ request.from_time }} - {{ request.to_time }}</h6>
+          <h5>{{request.boardroom.name}}</h5>
+          <a href="#!/request/{{request.id}}" class="secondary-content">
+            <i class="material-icons">info</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

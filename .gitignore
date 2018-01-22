@@ -6,3 +6,9 @@
 */.project
 */bin
 *.class
+*.db
+*/.scannerwork/
+node_modules/
+package-lock.json
+.vscode/
+.eslintrc.js
