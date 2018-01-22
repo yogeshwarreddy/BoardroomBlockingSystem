@@ -36,7 +36,7 @@
       enabled: false,
       requireBase: false
     });
-  }).run(function ($rootScope, $location, auth) {
+  }).run(function ($rootScope, $location, auth, $http) {
     $rootScope.loggedIn = false;
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if (next == "/login" && auth.isUserLoggedIn()) {
@@ -47,6 +47,16 @@
         event.preventDefault();
       }
     });
+    $rootScope.logout = function () {
+      $http.get("/helloworld/logout").then(function (response) {
+        localStorage.clear();
+        $rootScope.loggedIn = false;
+        location.path("/login");
+      }).catch(function (error) {
+
+      });
+
+    }
   });
   angular.module("index").controller("homeController", function ($scope, $http) {
     $http.get("/helloworld/rooms").then(function (response) {
