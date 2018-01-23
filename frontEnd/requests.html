@@ -1,0 +1,20 @@
+<div class="container">
+  <ul class="collection">
+    <li class="collection-item avatar" data-ng-repeat="request in requests">
+      <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/c3/58/a5/boardroom.jpg" alt="room" class="circle">
+      <span class="title">
+        <h4>{{ request.boardroom.name }}</h4>
+      </span>
+      <p>
+        Capacity: {{ request.boardroom.capacity }}
+      </p>
+      <h5>{{ request.from_time }} - {{ request.to_time }}
+        <span class="badge red white-text">{{request.status}}</span>
+      </h5>
+      <a href="#!/request/{{request.id}}" class="secondary-content">
+
+        <i class="material-icons">info</i>
+      </a>
+    </li>
+  </ul>
+</div>
