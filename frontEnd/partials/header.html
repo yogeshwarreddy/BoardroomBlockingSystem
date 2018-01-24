@@ -1,0 +1,59 @@
+<header>
+  <nav class="blue">
+    <div class="nav-wrapper">
+      <div class="">
+        <div class="brand-logo center">
+          <i class="material-icons">book</i>
+          <a href="#!/" class="hide-on-small-only">BoardRoom Booking</a>
+        </div>
+        <a href="#" data-activates="mobile-menu" class="button-collapse" data-ng-if="loggedIn">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down" data-ng-if="loggedIn">
+          <li>
+            <a href="#!/requests">Requests</a>
+          </li>
+          <li data-ng-if="isAdmin()">
+            <a href="#!/admin">Admin</a>
+          </li>
+          <li>
+            <a href="#!/profile">Profile</a>
+          </li>
+          <li>
+            <a href="#!/logout">Logout</a>
+          </li>
+        </ul>
+        <ul class="side-nav red lighten-2" id="mobile-menu" data-ng-if="loggedIn">
+          <li>
+            <div class="userView">
+              <a href="#!/profile">
+                <img class="circle" src="http://shrimahaveerschool.com/wp-content/uploads/2015/06/image_gallery.png" alt="User Image Sidenav">
+              </a>
+              <a href="#!/profile">
+                <span class=" name">{{user.firstName}}</span>
+              </a>
+              <a href="#!/profile">
+                <span class=" email">{{user.email}}</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <a href="#!/rooms">Board Rooms</a>
+          </li>
+          <li>
+            <a href="#/requests">Requests</a>
+          </li>
+          <li data-ng-if="isAdmin()">
+            <a href="#!/admin">Admin</a>
+          </li>
+          <li>
+            <a href="#!/profile">Profile</a>
+          </li>
+          <li>
+            <a href="#!/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
