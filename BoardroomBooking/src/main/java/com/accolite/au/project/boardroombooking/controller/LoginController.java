@@ -1,12 +1,10 @@
 package com.accolite.au.project.boardroombooking.controller;
 
-import org.apache.log4j.Logger;
-
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +27,6 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@Autowired
-	private HttpSession httpSession;
 
 	@Autowired
 	private UserService userService;
@@ -88,10 +84,10 @@ public class LoginController {
 	}
 
 	@GetMapping("/logout")
-	public ResponseEntity<String> userLogout(HttpSession httpSession) {
+	public ResponseEntity<User> userLogout(HttpSession httpSession) {
 		logger.info("User Logging out");
 		httpSession.invalidate();
-		return ResponseEntity.ok().body("Logged out");
+		return ResponseEntity.ok().body(null);
 	}
 
 }
